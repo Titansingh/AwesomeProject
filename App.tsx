@@ -9,9 +9,9 @@ function App() {
   return (
     <Provider store={store}>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.headingText}>Colleague App</Text>
+        <Text style={styles.headingText}>Exam Buddy</Text>
         <EnterTextBar />
-        <Text style={styles.subHeadingText}>Colleague List</Text>
+        <Text style={styles.subHeadingText}>PDF List</Text>
         <ShowTodoList />
       </SafeAreaView>
     </Provider>

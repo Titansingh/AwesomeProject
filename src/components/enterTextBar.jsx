@@ -19,7 +19,7 @@ const EnterTextBar = () => {
           style={styles.input}
           onChangeText={onChangeText}
           value={text}
-          placeholder='Enter a Name'
+          placeholder='Enter Subject Name'
         />
         <Button
           title="Add"
