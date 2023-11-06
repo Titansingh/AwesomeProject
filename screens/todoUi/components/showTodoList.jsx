@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { removeTodo, updateTodo } from '../../redux/apiSlice/todoSlice';
+import { removeTodo, updateTodo } from '../../../redux/apiSlice/todoSlice';
 
 export default function ShowTodoList() {
   const [modalVisible, setModalVisible] = useState(false);
