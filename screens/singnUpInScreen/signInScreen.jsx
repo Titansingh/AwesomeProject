@@ -1,8 +1,10 @@
 import {
   KeyboardAvoidingView,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import React from 'react';
@@ -19,15 +21,70 @@ const signInScreen = () => {
     Email: string().email(),
     Password: string().required('Password is Required'),
   });
+
+  
   return (
-    <KeyboardAvoidingView>
+    <KeyboardAvoidingView style={{flex: 1}}>
       <View style={styles.container}>
         <Text style={styles.headingText}>Welcome</Text>
         <Text style={styles.headingText}>Back</Text>
       </View>
-      <View style={styles.containerMain} >
-        <Text>vaibhav</Text>
-      </View>
+      <ScrollView style={styles.containerMain}>
+        <Text style={styles.titleText}>ACCOUNT DETAILS</Text>
+        <Formik
+          initialValues={{
+            UserName: '',
+            Email: '',
+            Password: '',
+          }}
+          validationSchema={userSchema}
+          onSubmit={values => console.log(values + 'values login screen')}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            touched,
+            errors,
+          }) => (
+            <View>
+              <CustomTextInput
+                handleChange={handleChange('UserName')}
+                values={values.UserName}
+                touched={touched.UserName}
+                errors={errors.UserName}
+                placeholder={'Username'}
+                title={'UserName'}
+              />
+              <CustomTextInput
+                handleChange={handleChange('Email')}
+                values={values.Email}
+                touched={touched.Email}
+                errors={errors.Email}
+                placeholder={'Email'}
+                title={'Email'}
+              />
+
+              <CustomTextInput
+                handleChange={handleChange('Password')}
+                values={values.Password}
+                touched={touched.Password}
+                errors={errors.Password}
+                placeholder={'Password'}
+                title={'Password'}
+              />
+              <View style={{alignItems: 'flex-end'}}>
+                <Button text={'Login'} handleSubmit={handleSubmit} />
+              </View>
+            </View>
+          )}
+        </Formik>
+        <TouchableOpacity style={{alignSelf: 'center'}}>
+          <Text style={styles.titleText}>
+            Create Account
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
