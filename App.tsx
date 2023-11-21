@@ -1,16 +1,18 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import {store} from './redux/store';
 import {Provider} from 'react-redux';
 import TodoUi from './screens/todoUi/todoUi';
 import HomeScreen from './screens/homeScreen/homeScreen';
 import PasswordScreen from './screens/passwordScreen/passwordScreen';
-import SignUpScreen from './screens/singnUpInScreen/signUpScreen';
-import SignInScreen from './screens/singnUpInScreen/signInScreen';
+
+import MainNavigator from './navigation/mainNavigator';
 function App() {
   return (
     <Provider store={store}>
-      <SignInScreen />
+      <NavigationContainer>
+      <MainNavigator  />
+      </NavigationContainer>
     </Provider>
   );
 }
