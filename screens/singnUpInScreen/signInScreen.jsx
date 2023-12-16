@@ -15,14 +15,13 @@ import Button from '../../src/button';
 import {object, string, number, date, InferType} from 'yup';
 import {Formik} from 'formik';
 
-const signInScreen = () => {
+const signInScreen = ({navigation}) => {
   let userSchema = object().shape({
     UserName: string().required('Username is Required'),
     Email: string().email(),
     Password: string().required('Password is Required'),
   });
 
-  
   return (
     <KeyboardAvoidingView style={{flex: 1}}>
       <View style={styles.container}>
@@ -79,10 +78,12 @@ const signInScreen = () => {
             </View>
           )}
         </Formik>
-        <TouchableOpacity style={{alignSelf: 'center'}}>
-          <Text style={styles.titleText}>
-            Create Account
-          </Text>
+        <TouchableOpacity
+          style={{alignSelf: 'center'}}
+          onPress={() => {
+            navigation.navigate('SignUpScreen');
+          }}>
+          <Text style={styles.titleText}>Create Account</Text>
         </TouchableOpacity>
       </ScrollView>
     </KeyboardAvoidingView>

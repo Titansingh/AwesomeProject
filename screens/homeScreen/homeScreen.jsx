@@ -30,7 +30,7 @@ const HomeScreen = () => {
         console.error('Error fetching data:', error);
       });
 
-      console.log("get data called")
+    console.log('get data called');
   };
 
   const getProductData = () => {
@@ -38,12 +38,11 @@ const HomeScreen = () => {
       .then(response => response.json())
       .then(data => {
         setdataProduct(data);
-        
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
-      console.log("get Product data called")
+    console.log('get Product data called');
   };
 
   return (
@@ -71,7 +70,6 @@ const HomeScreen = () => {
           renderItem={({item}) => <FancyCard color="#87CEEB" props={item} />}
           keyExtractor={item => item.id.toString()}
         />
-        
       </ScrollView>
     </SafeAreaView>
   );
