@@ -10,28 +10,27 @@ import {
 import React, {useState, useEffect} from 'react';
 import FlatCards from './components/flatCards';
 import FancyCard from './components/fancyCard';
-
+import { useGetUsersQuery } from '../../redux/apiSlice/homePageApi.js';
+const a =[ {
+  name:"vaibhav",
+  id:1
+}, 
+   {
+  name:"vaibhav2",
+  id:2
+}]
 const HomeScreen = () => {
-  const [data, setData] = useState([]);
+  const [data1, setData1] = useState([]);
   const [dataProduct, setdataProduct] = useState([]);
+  const { data } = useGetUsersQuery();
+
 
   useEffect(() => {
-    getData();
+    
     getProductData();
   }, []);
 
-  const getData = () => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(data => {
-        setData(data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-
-    console.log('get data called');
-  };
+  
 
   const getProductData = () => {
     fetch('https://fakestoreapi.com/products')
@@ -54,7 +53,7 @@ const HomeScreen = () => {
           <FlatCards color="red" prop={{name: 'Red Card'}} />
           <FlatCards color="green" prop={{name: 'Green Card'}} />
         </View>
-        <TouchableOpacity onPress={getData}>
+        <TouchableOpacity onPress={() =>{}}>
           <Text style={styles.heading}>Elevated Cards</Text>
         </TouchableOpacity>
         <FlatList
@@ -70,6 +69,7 @@ const HomeScreen = () => {
           renderItem={({item}) => <FancyCard color="#87CEEB" props={item} />}
           keyExtractor={item => item.id.toString()}
         />
+        
       </ScrollView>
     </SafeAreaView>
   );

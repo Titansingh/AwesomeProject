@@ -1,29 +1,41 @@
+import React from 'react';
 import {
   KeyboardAvoidingView,
-  Pressable,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
-//custom components
+import { object, string } from 'yup';
+import { Formik } from 'formik';
 import CustomTextInput from '../../src/customTextInput';
 import Button from '../../src/button';
-//validation
-import {object, string, number, date, InferType} from 'yup';
-import {Formik} from 'formik';
+import { useLoginUserMutation } from '../../redux/apiSlice/authenticationApi';
 
-const signInScreen = ({navigation}) => {
-  let userSchema = object().shape({
+const SignInScreen = ({ navigation }) => {
+  const [loginUser] = useLoginUserMutation();
+
+  const userSchema = object().shape({
     UserName: string().required('Username is Required'),
     Email: string().email(),
     Password: string().required('Password is Required'),
   });
 
+  const handleLogin = async (values) => {
+    try {
+      const response = await loginUser(values).unwrap(); // Assuming the login mutation returns a Promise
+      console.log('Login response:', response);
+      // Handle successful login, e.g., navigate to a new screen
+      navigation.navigate('HomeScreen');
+    } catch (error) {
+      console.error('Login error:', error);
+      // Handle login error, display error message, etc.
+    }
+  };
+
   return (
-    <KeyboardAvoidingView style={{flex: 1}}>
+    <KeyboardAvoidingView style={{ flex: 1 }}>
       <View style={styles.container}>
         <Text style={styles.headingText}>Welcome</Text>
         <Text style={styles.headingText}>Back</Text>
@@ -37,7 +49,11 @@ const signInScreen = ({navigation}) => {
             Password: '',
           }}
           validationSchema={userSchema}
-          onSubmit={values => console.log(values + 'values login screen')}>
+          onSubmit={(values, { resetForm }) => {
+            handleLogin(values);
+            resetForm(); // Reset the form after submission
+          }}
+        >
           {({
             handleChange,
             handleBlur,
@@ -49,40 +65,41 @@ const signInScreen = ({navigation}) => {
             <View>
               <CustomTextInput
                 handleChange={handleChange('UserName')}
-                values={values.UserName}
+                value={values.UserName}
                 touched={touched.UserName}
-                errors={errors.UserName}
+                error={errors.UserName}
                 placeholder={'Username'}
                 title={'UserName'}
               />
               <CustomTextInput
                 handleChange={handleChange('Email')}
-                values={values.Email}
+                value={values.Email}
                 touched={touched.Email}
-                errors={errors.Email}
+                error={errors.Email}
                 placeholder={'Email'}
                 title={'Email'}
               />
-
               <CustomTextInput
                 handleChange={handleChange('Password')}
-                values={values.Password}
+                value={values.Password}
                 touched={touched.Password}
-                errors={errors.Password}
+                error={errors.Password}
                 placeholder={'Password'}
                 title={'Password'}
+                secureTextEntry // assuming this is for password input
               />
-              <View style={{alignItems: 'flex-end'}}>
+              <View style={{ alignItems: 'flex-end' }}>
                 <Button text={'Login'} handleSubmit={handleSubmit} />
               </View>
             </View>
           )}
         </Formik>
         <TouchableOpacity
-          style={{alignSelf: 'center'}}
+          style={{ alignSelf: 'center' }}
           onPress={() => {
             navigation.navigate('SignUpScreen');
-          }}>
+          }}
+        >
           <Text style={styles.titleText}>Create Account</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -90,7 +107,7 @@ const signInScreen = ({navigation}) => {
   );
 };
 
-export default signInScreen;
+export default SignInScreen;
 
 const styles = StyleSheet.create({
   container: {
