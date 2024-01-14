@@ -4,8 +4,8 @@ const initialState = {
   lastSearches: [{id: 1, text: 'Bill Gates'}],
 };
 
-export const homePageSlice = createSlice({
-  name: 'homePage',
+export const bookPageSlice = createSlice({
+  name: 'bookPage',
   initialState,
   reducers: {
     addLastSearch: (state, action) => {
@@ -27,5 +27,5 @@ export const homePageSlice = createSlice({
   },
 });
 
-export const {addLastSearch, removeLastSearch} = homePageSlice.actions;
-export default homePageSlice.reducer;
+export const {addLastSearch, removeLastSearch} = bookPageSlice.actions;
+export default bookPageSlice.reducer;
