@@ -3,12 +3,14 @@ import HomeScreen from '../screens/homeScreen/homeScreen';
 import TodoUi from '../screens/todoUi/todoUi';
 import PasswordScreen from '../screens/passwordScreen/passwordScreen';
 import BookScreen from '../screens/bookScreen//bookScreen'
+import TictakScreen from "../screens/tictakScreen/tictakScreen";
 
 const BottomTab = createBottomTabNavigator();
 
 export default function bottomTabNavigator () {
     return (
         <BottomTab.Navigator>
+            <BottomTab.Screen name="TicTak" component={TictakScreen} />
         <BottomTab.Screen name="Home" component={HomeScreen} />
         <BottomTab.Screen name="TodoUi" component={TodoUi} />
         <BottomTab.Screen name="Password" component={PasswordScreen} />
