@@ -131,5 +131,6 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: '#b7b8fb',
     fontWeight: 'bold',
+    textDecorationLine:'underline'
   },
 });

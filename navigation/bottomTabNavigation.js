@@ -1,20 +1,37 @@
+import React from 'react';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Icon from 'react-native-vector-icons/Ionicons';
+
+//Screen
 import HomeScreen from '../screens/homeScreen/homeScreen';
-import TodoUi from '../screens/todoUi/todoUi';
-import PasswordScreen from '../screens/passwordScreen/passwordScreen';
-import BookScreen from '../screens/bookScreen//bookScreen'
-import TictakScreen from "../screens/tictakScreen/tictakScreen";
+import ProfileScreen from '../screens/profileScreen/ProfileScreen';
 
 const BottomTab = createBottomTabNavigator();
 
-export default function bottomTabNavigator () {
+export default function BottomTabNavigator() {
     return (
         <BottomTab.Navigator>
-            <BottomTab.Screen name="TicTak" component={TictakScreen} />
-        <BottomTab.Screen name="Home" component={HomeScreen} />
-        <BottomTab.Screen name="TodoUi" component={TodoUi} />
-        <BottomTab.Screen name="Password" component={PasswordScreen} />
-        <BottomTab.Screen name="BookScreen" component={BookScreen} />
+            <BottomTab.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <Icon name="home-outline" color={color} size={size} />
+                    ),
+                    headerShown: false ,
+                }}
+            />
+            <BottomTab.Screen
+                name="Profile"
+                component={ProfileScreen}
+                options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <Icon name="person-outline" color={color} size={size} />
+                    ),
+                     headerShown: false ,
+                }}
+            />
+            
         </BottomTab.Navigator>
-    )
+    );
 }
