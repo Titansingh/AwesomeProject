@@ -13,7 +13,7 @@ import Button from '../../src/button';
 import {object, string, number, date, InferType} from 'yup';
 import {Formik} from 'formik';
 
-const signUpScreen = () => {
+const SignUpScreen = () => {
   let newUserSchema = object().shape({
     Name: string().required('Name is Required'),
     UserName: string().required('Username is Required'),
@@ -114,7 +114,7 @@ const signUpScreen = () => {
   );
 };
 
-export default signUpScreen;
+export default SignUpScreen;
 
 const styles = StyleSheet.create({
   container: {

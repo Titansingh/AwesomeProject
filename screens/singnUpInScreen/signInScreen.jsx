@@ -7,18 +7,20 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { useTheme } from '@react-navigation/native';
 import { object, string } from 'yup';
 import { Formik } from 'formik';
 import CustomTextInput from '../../src/customTextInput';
 import Button from '../../src/button';
 import { useLoginUserMutation } from '../../redux/apiSlice/authenticationApi';
+import * as Animatable from 'react-native-animatable';
 
 const SignInScreen = ({ navigation }) => {
+  const {colors} = useTheme();
   const [loginUser] = useLoginUserMutation();
 
   const userSchema = object().shape({
-    UserName: string().required('Username is Required'),
-    Email: string().email(),
+    Email: string().email().required('Email is Required'),
     Password: string().required('Password is Required'),
   });
 
@@ -35,16 +37,11 @@ const SignInScreen = ({ navigation }) => {
   };
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        <Text style={styles.headingText}>Welcome</Text>
-        <Text style={styles.headingText}>Back</Text>
-      </View>
-      <ScrollView style={styles.containerMain}>
-        <Text style={styles.titleText}>ACCOUNT DETAILS</Text>
+    <KeyboardAvoidingView style={{ flex: 1 ,position: 'relative',}}>
+      
+       
         <Formik
           initialValues={{
-            UserName: '',
             Email: '',
             Password: '',
           }}
@@ -62,47 +59,54 @@ const SignInScreen = ({ navigation }) => {
             touched,
             errors,
           }) => (
-            <View>
-              <CustomTextInput
-                handleChange={handleChange('UserName')}
-                value={values.UserName}
-                touched={touched.UserName}
-                error={errors.UserName}
-                placeholder={'Username'}
-                title={'UserName'}
-              />
+            <View style={styles.containerMain}>
+              <View  style={styles.containerTop}>
+              <Animatable.View   style={styles.triangle}><Animatable.View animation={'fadeInLeft'} duration={1400} style={styles.triangleSmall}></Animatable.View></Animatable.View>
+        <View style={styles.square}></View>
+        <Animatable.View animation={'fadeInRight'} duration={1400} style={styles.line}></Animatable.View>
+       
+             
               <CustomTextInput
                 handleChange={handleChange('Email')}
                 value={values.Email}
                 touched={touched.Email}
                 error={errors.Email}
-                placeholder={'Email'}
+                placeholder={'Enter your email'}
                 title={'Email'}
+                iconName={'mail'}
               />
               <CustomTextInput
                 handleChange={handleChange('Password')}
                 value={values.Password}
                 touched={touched.Password}
                 error={errors.Password}
-                placeholder={'Password'}
+                placeholder={'Enter your password'}
                 title={'Password'}
-                secureTextEntry // assuming this is for password input
+                secureTextEntry={true}
+                iconName={'lock-closed'}
               />
-              <View style={{ alignItems: 'flex-end' }}>
-                <Button text={'Login'} handleSubmit={handleSubmit} />
+              
+               <TouchableOpacity onPress={() => {}}>
+                <Text style={styles.forgotPasswordText}>Create Account?</Text>
+              </TouchableOpacity>
+              
+
               </View>
+              <View style={styles.containerBottom}>
+              
+              <Button  text={'Login'} handleSubmit={handleSubmit} backgroundColor={colors.primary} textColor={'#ffff'} />
+              <TouchableOpacity onPress={() => {navigation.navigate('SignUpScreen')}}>
+                <Text style={styles.createAccountText}>Create Account?</Text>
+              </TouchableOpacity>
+              <Animatable.View animation={'fadeInRight'} duration={1400} style={styles.semicircle}></Animatable.View>
             </View>
+            </View>
+            
           )}
+          
         </Formik>
-        <TouchableOpacity
-          style={{ alignSelf: 'center' }}
-          onPress={() => {
-            navigation.navigate('SignUpScreen');
-          }}
-        >
-          <Text style={styles.titleText}>Create Account</Text>
-        </TouchableOpacity>
-      </ScrollView>
+        
+  
     </KeyboardAvoidingView>
   );
 };
@@ -110,27 +114,97 @@ const SignInScreen = ({ navigation }) => {
 export default SignInScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 0.4,
-    justifyContent: 'center',
-    marginLeft: 20,
+  containerMain:{
+    flex:1,
   },
-  containerMain: {
+  containerTop: {
     flex: 0.6,
-    backgroundColor: '#8584F9',
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    justifyContent:'flex-end',  
   },
-  headingText: {
-    fontSize: 30,
-    fontWeight: 'bold',
+  containerBottom: {
+    flex: 0.4,
+    alignItems:'center',
+    justifyContent:'center',
   },
-  titleText: {
-    marginLeft: 20,
-    marginTop: 20,
-    fontSize: 17,
-    color: '#b7b8fb',
-    fontWeight: 'bold',
+  createAccountText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color:'black',
     textDecorationLine:'underline'
+  },
+  forgotPasswordText: {
+    fontSize: 14,
+    fontWeight: '400',
+    color:'#084161',
+    alignSelf:'flex-end',
+    marginRight:30,
+    textDecorationLine:'underline'
+  },
+  triangle: {
+    flex:1,
+    alignItems:'center',
+    justifyContent:'center',
+    width: 180,
+    height: 180,
+    left: -90,
+    top: 40,
+    position: 'absolute',
+    transform: [{ rotate: '45deg' }],
+    transformOrigin: '0 0',
+    backgroundColor: '#084161',
+    elevation:5,
+  },
+  triangleSmall: {
+    width: 100,
+    height: 100,
+    backgroundColor: '#ffff',
+    elevation:5,
+    
+  },
+  square: {
+    width: 15,
+    height: 15,
+    left: 118,
+    top: 122,
+    position: 'absolute',
+    transform: [{ rotate: '45deg' }],
+    transformOrigin: '0 0',
+    backgroundColor: '#084161',
+    elevation:5,
+  },
+  line: {
+    width: 280,
+    height: 0,
+    left: 130,
+    top: 127,
+    backgroundColor: '#084161',
+    position: 'absolute',
+    borderWidth: 2.8,
+    borderColor: '#084161',
+    elevation:5,
+  },
+  semicircle: {
+    position: 'absolute',
+    width: '60%',
+    height: '70%',
+    bottom: 40,
+    right: '-30%',
+    backgroundColor: '#084161',
+    borderRadius: 9999,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 4,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
+    zIndex: -1,
   },
 });

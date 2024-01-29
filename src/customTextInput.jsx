@@ -1,57 +1,59 @@
-import {StyleSheet, Text, View, TextInput} from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import React from 'react';
 
-const customTextInput = ({
+const CustomTextInput = ({
   handleChange,
   values,
-  keyboardType='default',
+  keyboardType,
   touched,
   errors,
   placeholder,
-  title,
+  iconName,
+  secureTextEntry=false,
 }) => {
+  keyboardType = keyboardType || 'default'; // Default to 'default' if not provided
+
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{title}</Text>
-      <TextInput
-        style={styles.input}
-        placeholder={placeholder}
-        onChangeText={handleChange}
-        value={values}
-        keyboardType={keyboardType}
-      />
+      <View style={styles.rowContainer}>
+        <Icon style={{margin:10,}} name={iconName} color={'#084161'} size={35} />
+        <TextInput
+          style={styles.input}
+          placeholder={placeholder}
+          placeholderTextColor="#084161"
+          onChangeText={handleChange}
+          value={values}
+          keyboardType={keyboardType}
+          secureTextEntry={secureTextEntry}
+        />
+      </View>
       {touched && errors && <Text style={styles.errorText}>{errors}</Text>}
     </View>
   );
 };
 
-export default customTextInput;
+export default CustomTextInput;
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 5,
-    marginHorizontal:20,
+    marginVertical: 10,
+    marginHorizontal: 30,
   },
-  label: {
-    paddingStart: 20,
-    marginTop: 5,
-    fontWeight: 'bold',
-    marginBottom: 5,
-    fontSize: 20,
-    color:'#B7B8FB',
-    
+  rowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderColor: '#084161',
+    borderWidth: 3,
+    borderRadius: 8,
   },
   input: {
-    height: 50,
-    color:'white',
-    fontSize: 20,
-    borderWidth: 1,
-    borderRadius: 20,
-    paddingStart: 20,
-    borderColor: 'white',
+    height: 60,
+    fontSize: 14,
+      
   },
   errorText: {
-    color: 'black',
+    color: 'red',
     paddingEnd: 20,
     marginTop: 5,
     fontSize: 17,
