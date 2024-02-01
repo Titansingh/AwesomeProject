@@ -7,7 +7,7 @@ const CustomTextInput = ({
   values,
   keyboardType,
   touched,
-  errors,
+  error,
   placeholder,
   iconName,
   secureTextEntry=false,
@@ -17,18 +17,18 @@ const CustomTextInput = ({
   return (
     <View style={styles.container}>
       <View style={styles.rowContainer}>
-        <Icon style={{margin:10,}} name={iconName} color={'#084161'} size={35} />
+        <Icon style={{margin:10,}} name={iconName} color={'#FCD249'} size={35} />
         <TextInput
           style={styles.input}
           placeholder={placeholder}
-          placeholderTextColor="#084161"
+          placeholderTextColor="grey"
           onChangeText={handleChange}
           value={values}
           keyboardType={keyboardType}
           secureTextEntry={secureTextEntry}
         />
       </View>
-      {touched && errors && <Text style={styles.errorText}>{errors}</Text>}
+      {touched && error && <Text style={styles.errorText}>{error}</Text>}
     </View>
   );
 };
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderColor: '#084161',
+    borderColor: 'black',
     borderWidth: 3,
     borderRadius: 8,
   },
@@ -54,9 +54,9 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: 'red',
-    paddingEnd: 20,
+    paddingEnd: 5,
     marginTop: 5,
-    fontSize: 17,
+    fontSize: 12,
     alignSelf: 'flex-end',
   },
 });

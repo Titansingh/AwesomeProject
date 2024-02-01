@@ -13,7 +13,7 @@ const SignUpInScreen = ({ navigation }) => {
   };
 
   const handleSignupClick = () => {
-    navigation.navigate('SignUpScreen');
+    navigation.navigate('GetQuoteScreen');
     console.log('clicked')
   };
 
@@ -25,19 +25,19 @@ const SignUpInScreen = ({ navigation }) => {
         <Animatable.View animation={'fadeInRight'} duration={1400} style={styles.line}></Animatable.View>
         <View>
           <Text style={{ marginLeft: 30, marginTop: 60, color: 'black', fontSize: 32, fontWeight: '700', }}>
-            Lawyer Connect
+            Galo Energy
           </Text>
 
           <View style={{ flexDirection: 'row', marginLeft: 30 }}>
-            <Text style={{ fontSize: 15, fontWeight: '400' }}>Cross your </Text>
-            <Text style={{ fontSize: 15, fontWeight: '700', color: colors.primary }}>Struggle </Text>
-            <Text style={{ fontSize: 15, fontWeight: '400' }}>with us</Text>
+            <Text style={{ fontSize: 15, fontWeight: '400' }}>Specializing in </Text>
+            <Text style={{ fontSize: 15, fontWeight: '700', color: colors.primary }}>Solar </Text>
+            <Text style={{ fontSize: 15, fontWeight: '400' }}>Energy applications</Text>
           </View>
         </View>
       </View>
       <View style={styles.bottomContainer}>
-        <Button text={'Log In'} textColor="#FFFFFF" backgroundColor={colors.primary} handleSubmit={handleLoginClick} />
-        <Button text={'Sign Up'} textColor={colors.primary} backgroundColor="#FFFFFF" handleSubmit={handleSignupClick} />
+        <Button text={'Log In'} textColor="black" backgroundColor={colors.primary} handleSubmit={handleLoginClick} />
+        <Button text={'Get Quote'} textColor={colors.primary} backgroundColor="#FFFFFF" handleSubmit={handleSignupClick} />
         <Animatable.View animation={'fadeInRight'} duration={1400} style={styles.semicircle}></Animatable.View>
       </View>
     </SafeAreaView>
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     transform: [{ rotate: '45deg' }],
     transformOrigin: '0 0',
-    backgroundColor: '#084161',
+    backgroundColor: '#FCD249',
     elevation:5,
   },
   triangleSmall: {
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     transform: [{ rotate: '45deg' }],
     transformOrigin: '0 0',
-    backgroundColor: '#084161',
+    backgroundColor: '#FCD249',
     elevation:5,
   },
   line: {
@@ -97,10 +97,10 @@ const styles = StyleSheet.create({
     height: 0,
     left: 130,
     top: 127,
-    backgroundColor: '#084161',
+    backgroundColor: '#FCD249',
     position: 'absolute',
     borderWidth: 2.8,
-    borderColor: '#084161',
+    borderColor: '#FCD249',
     elevation:5,
   },
   semicircle: {
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     height: '70%',
     bottom: 40,
     right: '-30%',
-    backgroundColor: '#084161',
+    backgroundColor: '#FCD249',
     borderRadius: 9999,
     ...Platform.select({
       ios: {

@@ -12,7 +12,7 @@ import AuthStackNavigator from './navigation/authStackNavigator';
 const LightTheme = {
   dark: false,
   colors: {
-    primary: '#084161',
+    primary: '#FCD249',
     background: 'rgb(242, 242, 242)',
     card: 'rgb(255, 255, 255)',
     text: 'rgb(28, 28, 30)',
@@ -24,7 +24,7 @@ const LightTheme = {
 const DarkTheme = {
   dark: true,
   colors: {
-    primary: '#084161',
+    primary: '#FCD249',
     background: 'rgb(0, 0, 0)',
     card: 'rgb(255, 255, 255)',
     text: '#ffff',

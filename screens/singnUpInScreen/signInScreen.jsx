@@ -87,15 +87,15 @@ const SignInScreen = ({ navigation }) => {
               />
               
                <TouchableOpacity onPress={() => {}}>
-                <Text style={styles.forgotPasswordText}>Create Account?</Text>
+                <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
               </TouchableOpacity>
               
 
               </View>
               <View style={styles.containerBottom}>
               
-              <Button  text={'Login'} handleSubmit={handleSubmit} backgroundColor={colors.primary} textColor={'#ffff'} />
-              <TouchableOpacity onPress={() => {navigation.navigate('SignUpScreen')}}>
+              <Button  text={'Login'} handleSubmit={handleSubmit} backgroundColor={colors.primary} textColor={'black'} />
+              <TouchableOpacity onPress={() => {console.log('create account')}}>
                 <Text style={styles.createAccountText}>Create Account?</Text>
               </TouchableOpacity>
               <Animatable.View animation={'fadeInRight'} duration={1400} style={styles.semicircle}></Animatable.View>
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   forgotPasswordText: {
     fontSize: 14,
     fontWeight: '400',
-    color:'#084161',
+    color:'#FCD249',
     alignSelf:'flex-end',
     marginRight:30,
     textDecorationLine:'underline'
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     transform: [{ rotate: '45deg' }],
     transformOrigin: '0 0',
-    backgroundColor: '#084161',
+    backgroundColor: '#FCD249',
     elevation:5,
   },
   triangleSmall: {
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     transform: [{ rotate: '45deg' }],
     transformOrigin: '0 0',
-    backgroundColor: '#084161',
+    backgroundColor: '#FCD249',
     elevation:5,
   },
   line: {
@@ -177,10 +177,10 @@ const styles = StyleSheet.create({
     height: 0,
     left: 130,
     top: 127,
-    backgroundColor: '#084161',
+    backgroundColor: '#FCD249',
     position: 'absolute',
     borderWidth: 2.8,
-    borderColor: '#084161',
+    borderColor: '#FCD249',
     elevation:5,
   },
   semicircle: {
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     height: '70%',
     bottom: 40,
     right: '-30%',
-    backgroundColor: '#084161',
+    backgroundColor: '#FCD249',
     borderRadius: 9999,
     ...Platform.select({
       ios: {
