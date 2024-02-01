@@ -20,15 +20,15 @@ import {
 const BookScreen = () => {
   const [authorName, setAuthorName] = useState('');
   const [authorCompleteName, setAuthorCompleteName] = useState('');
-  const {data, error, isLoading} = useGetAuthorQuery(authorCompleteName);
+  const {data, error, isLoading} = useGetAuthorQuery(authorCompleteName);//api call
   const lastSearches = useSelector(state => state.bookPageReducer.lastSearches);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();// use dispatch
 
   const handleSearch = async () => {
     if (authorName.trim() !== '') {
       setAuthorCompleteName(authorName);
-      dispatch(addLastSearch(authorName));
+      dispatch(addLastSearch(authorName));//dispatch action
     }
   };
 
