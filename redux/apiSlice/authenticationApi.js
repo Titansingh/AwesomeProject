@@ -4,13 +4,13 @@ export const authenticationApi = createApi({
 
   reducerPath:"authenticationApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3000/api/v1/users"
+    baseUrl: "https://dummyjson.com/auth"
   }),
   endpoints: (builder) => ({
     loginUser: builder.mutation({
       query: (userData) => ({
         url: "/login",
-        method: "Post",
+        method: "post",
         body: userData,
       })
     })

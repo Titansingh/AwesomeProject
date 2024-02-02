@@ -1,19 +1,25 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware , combineReducers} from '@reduxjs/toolkit';
 
 import { authenticationApi } from './apiSlice/authenticationApi';
+import { setupListeners } from '@reduxjs/toolkit/query';
+import persistReducer from 'redux-persist/es/persistReducer';
+import storage from 'redux-persist/lib/storage';
 
-
+let persistConfig = {
+  key:'root',
+  storage,
+}
+let rootReducer = combineReducers({
+  [authenticationApi.reducerPath]: authenticationApi.reducer, 
+})
+let persistedReducer = persistReducer(persistConfig,rootReducer)
 export const store = configureStore({
-  reducer: {
+  reducer: persistedReducer,
     
-   
-    [authenticationApi.reducerPath]: authenticationApi.reducer,
-    
-  },
+  
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
-    
-      authenticationApi.middleware,
-      
+      authenticationApi.middleware,  
     ),
 });
+setupListeners(store.dispatch)

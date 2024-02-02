@@ -14,25 +14,35 @@ import CustomTextInput from '../../src/customTextInput';
 import Button from '../../src/button';
 import { useLoginUserMutation } from '../../redux/apiSlice/authenticationApi';
 import * as Animatable from 'react-native-animatable';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignInScreen = ({ navigation }) => {
   const {colors} = useTheme();
   const [loginUser] = useLoginUserMutation();
+  const storeToken = async (value) => {
+    try {
+      await AsyncStorage.setItem('token', value);
+    } catch (e) {
+      // saving error
+    }
+  }
 
   const userSchema = object().shape({
     Email: string().email().required('Email is Required'),
     Password: string().required('Password is Required'),
   });
 
-  const handleLogin = async (values) => {
+  const handleLogin = async () => {
     try {
-      const response = await loginUser(values).unwrap(); // Assuming the login mutation returns a Promise
-      console.log('Login response:', response);
-      // Handle successful login, e.g., navigate to a new screen
-      navigation.navigate('HomeScreen');
+      const response = await loginUser({
+        username: 'kminchelle',
+        password: '0lelplR',
+      })
+      storeToken(response.data.token)
+    
+     
     } catch (error) {
       console.error('Login error:', error);
-      // Handle login error, display error message, etc.
     }
   };
 

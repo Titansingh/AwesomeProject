@@ -4,9 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
 
-import BottomTabNavigator from './navigation/bottomTabNavigation';
-import MainNavigator from './navigation/mainNavigator';
-import AuthStackNavigator from './navigation/authStackNavigator';
+import MainStackNavigator from './navigation/MainStackNavigator';
+
+import persistStore from 'redux-persist/es/persistStore';
+import { PersistGate } from 'redux-persist/integration/react';
 
 
 const LightTheme = {
@@ -33,13 +34,18 @@ const DarkTheme = {
   },
 };
 
-
+let persistor = persistStore(store)
 function App() {
+
   const scheme = useColorScheme();
+
+
+
   return (
     <Provider store={store}>
+      <PersistGate persistor={persistor}></PersistGate>
       <NavigationContainer theme={scheme === 'dark' ? DarkTheme : LightTheme}>
-        <AuthStackNavigator />
+        <MainStackNavigator />
       </NavigationContainer>
     </Provider>
   );
